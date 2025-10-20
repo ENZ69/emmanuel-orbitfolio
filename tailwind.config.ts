@@ -120,6 +120,14 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        "marquee-left": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-right": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -134,6 +142,8 @@ export default {
         "orbit-2": "orbit-2 25s linear infinite",
         "orbit-3": "orbit-3 30s linear infinite",
         "orbit-4": "orbit-4 35s linear infinite",
+        "marquee-left": "marquee-left 30s linear infinite",
+        "marquee-right": "marquee-right 30s linear infinite",
       },
     },
   },
