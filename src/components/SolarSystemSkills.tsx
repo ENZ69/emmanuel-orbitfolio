@@ -1,0 +1,134 @@
+import { useEffect, useRef } from "react";
+
+const skills = [
+  { name: "React", color: "hsl(193 95% 68%)", icon: "⚛️" },
+  { name: "Node.js", color: "hsl(120 100% 40%)", icon: "🟢" },
+  { name: "Express", color: "hsl(0 0% 100%)", icon: "🚂" },
+  { name: "MongoDB", color: "hsl(120 100% 35%)", icon: "🍃" },
+  { name: "PHP/Laravel", color: "hsl(10 90% 55%)", icon: "🔴" },
+  { name: "Java/Spring", color: "hsl(120 60% 50%)", icon: "☕" },
+];
+
+const SolarSystemSkills = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      const planets = container.querySelectorAll('.planet');
+      planets.forEach((planet, index) => {
+        const speed = 0.02 + index * 0.005;
+        const moveX = x * speed;
+        const moveY = y * speed;
+        (planet as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+    };
+
+    container.addEventListener('mousemove', handleMouseMove);
+    return () => container.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <section id="competences" className="section-padding relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16 animate-fade-in-up">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-gradient">Mes Compétences</span>
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Un système solaire de technologies que je maîtrise
+          </p>
+        </div>
+
+        <div 
+          ref={containerRef}
+          className="relative h-[600px] md:h-[700px] flex items-center justify-center"
+        >
+          {/* Central Sun (Me) */}
+          <div className="absolute z-20 w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center animate-pulse-glow shadow-[0_0_100px_rgba(59,130,246,0.5)]">
+            <div className="text-5xl md:text-6xl">👨‍💻</div>
+          </div>
+
+          {/* Orbital Rings */}
+          {[1, 2, 3].map((ring) => (
+            <div
+              key={ring}
+              className="absolute rounded-full border border-primary/10"
+              style={{
+                width: `${ring * 200}px`,
+                height: `${ring * 200}px`,
+              }}
+            />
+          ))}
+
+          {/* Planets (Skills) */}
+          {skills.map((skill, index) => {
+            const angle = (index * 360) / skills.length;
+            const radius = 200 + (index % 2) * 80;
+            const delay = index * 3;
+
+            return (
+              <div
+                key={skill.name}
+                className="planet absolute"
+                style={{
+                  animation: `orbit ${20 + index * 2}s linear infinite`,
+                  animationDelay: `${delay}s`,
+                }}
+              >
+                <div
+                  className="relative group cursor-pointer"
+                  style={{
+                    transform: `rotate(${angle}deg) translateX(${radius}px) rotate(-${angle}deg)`,
+                  }}
+                >
+                  {/* Planet */}
+                  <div
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-125 glass-card hover-glow"
+                    style={{
+                      backgroundColor: skill.color,
+                      boxShadow: `0 0 30px ${skill.color}80`,
+                    }}
+                  >
+                    <span className="text-3xl md:text-4xl">{skill.icon}</span>
+                  </div>
+                  
+                  {/* Label */}
+                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-semibold text-foreground bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full border border-primary/20">
+                      {skill.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Skills Grid for Mobile */}
+        <div className="md:hidden grid grid-cols-2 gap-4 mt-8">
+          {skills.map((skill) => (
+            <div key={skill.name} className="glass-card p-4 text-center hover-glow">
+              <div className="text-4xl mb-2">{skill.icon}</div>
+              <div className="text-sm font-semibold">{skill.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl" />
+      </div>
+    </section>
+  );
+};
+
+export default SolarSystemSkills;
