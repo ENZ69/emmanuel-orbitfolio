@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 const skills = [
   { name: "React", color: "hsl(193 95% 68%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
   { name: "Node.js", color: "hsl(120 100% 40%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
@@ -17,30 +15,6 @@ const skills = [
 ];
 
 const SolarSystemSkills = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      const planets = container.querySelectorAll('.planet');
-      planets.forEach((planet, index) => {
-        const speed = 0.02 + index * 0.005;
-        const moveX = x * speed;
-        const moveY = y * speed;
-        (planet as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
-      });
-    };
-
-    container.addEventListener('mousemove', handleMouseMove);
-    return () => container.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <section id="competences" className="section-padding relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -54,7 +28,6 @@ const SolarSystemSkills = () => {
         </div>
 
         <div 
-          ref={containerRef}
           className="relative h-[600px] md:h-[700px] flex items-center justify-center"
         >
           {/* Central Sun (Me) */}
@@ -76,26 +49,25 @@ const SolarSystemSkills = () => {
 
           {/* Planets (Skills) */}
           {skills.map((skill, index) => {
-            const angle = (index * 360) / skills.length;
             const orbitRing = (index % 4) + 1;
             const radius = orbitRing * 160;
             const orbitDuration = 15 + orbitRing * 5;
+            const startAngle = (index * 360) / skills.length;
 
             return (
               <div
                 key={skill.name}
-                className="planet absolute w-0 h-0"
+                className="planet absolute"
                 style={{
-                  animation: `orbit ${orbitDuration}s linear infinite`,
+                  animation: `orbit-${orbitRing} ${orbitDuration}s linear infinite`,
                   animationDelay: `${-index * (orbitDuration / skills.length)}s`,
-                  left: '50%',
-                  top: '50%',
+                  transform: `rotate(${startAngle}deg)`,
                 }}
               >
                 <div
                   className="relative group cursor-pointer"
                   style={{
-                    transform: `translateX(${radius}px) translateX(-50%)`,
+                    transform: `translateX(${radius}px) rotate(-${startAngle}deg)`,
                   }}
                 >
                   {/* Planet */}

@@ -104,9 +104,21 @@ export default {
           "0%": { opacity: "0", transform: "translateX(50px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
         },
-        "orbit": {
-          "0%": { transform: "rotate(0deg) translateX(150px) rotate(0deg)" },
-          "100%": { transform: "rotate(360deg) translateX(150px) rotate(-360deg)" },
+        "orbit-1": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "orbit-2": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "orbit-3": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "orbit-4": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
       animation: {
@@ -118,7 +130,10 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "slide-in-left": "slide-in-left 0.6s ease-out",
         "slide-in-right": "slide-in-right 0.6s ease-out",
-        "orbit": "orbit 20s linear infinite",
+        "orbit-1": "orbit-1 20s linear infinite",
+        "orbit-2": "orbit-2 25s linear infinite",
+        "orbit-3": "orbit-3 30s linear infinite",
+        "orbit-4": "orbit-4 35s linear infinite",
       },
     },
   },
