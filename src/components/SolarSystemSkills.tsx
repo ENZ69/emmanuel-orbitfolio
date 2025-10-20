@@ -1,12 +1,19 @@
 import { useEffect, useRef } from "react";
 
 const skills = [
-  { name: "React", color: "hsl(193 95% 68%)", icon: "⚛️" },
-  { name: "Node.js", color: "hsl(120 100% 40%)", icon: "🟢" },
-  { name: "Express", color: "hsl(0 0% 100%)", icon: "🚂" },
-  { name: "MongoDB", color: "hsl(120 100% 35%)", icon: "🍃" },
-  { name: "PHP/Laravel", color: "hsl(10 90% 55%)", icon: "🔴" },
-  { name: "Java/Spring", color: "hsl(120 60% 50%)", icon: "☕" },
+  { name: "React", color: "hsl(193 95% 68%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Node.js", color: "hsl(120 100% 40%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Express", color: "hsl(0 0% 85%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+  { name: "MongoDB", color: "hsl(120 100% 35%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+  { name: "PHP", color: "hsl(235 65% 50%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+  { name: "Laravel", color: "hsl(10 90% 55%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" },
+  { name: "Java", color: "hsl(10 80% 50%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+  { name: "Spring", color: "hsl(120 60% 50%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
+  { name: "HTML", color: "hsl(10 95% 60%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+  { name: "CSS", color: "hsl(210 95% 60%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+  { name: "JavaScript", color: "hsl(45 95% 60%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "TypeScript", color: "hsl(210 70% 55%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "Docker", color: "hsl(200 90% 55%)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
 ];
 
 const SolarSystemSkills = () => {
@@ -56,13 +63,13 @@ const SolarSystemSkills = () => {
           </div>
 
           {/* Orbital Rings */}
-          {[1, 2, 3].map((ring) => (
+          {[1, 2, 3, 4].map((ring) => (
             <div
               key={ring}
               className="absolute rounded-full border border-primary/10"
               style={{
-                width: `${ring * 200}px`,
-                height: `${ring * 200}px`,
+                width: `${ring * 160}px`,
+                height: `${ring * 160}px`,
               }}
             />
           ))}
@@ -70,33 +77,43 @@ const SolarSystemSkills = () => {
           {/* Planets (Skills) */}
           {skills.map((skill, index) => {
             const angle = (index * 360) / skills.length;
-            const radius = 200 + (index % 2) * 80;
-            const delay = index * 3;
+            const orbitRing = (index % 4) + 1;
+            const radius = orbitRing * 160;
+            const orbitDuration = 15 + orbitRing * 5;
 
             return (
               <div
                 key={skill.name}
-                className="planet absolute"
+                className="planet absolute w-0 h-0"
                 style={{
-                  animation: `orbit ${20 + index * 2}s linear infinite`,
-                  animationDelay: `${delay}s`,
+                  animation: `orbit ${orbitDuration}s linear infinite`,
+                  animationDelay: `${-index * (orbitDuration / skills.length)}s`,
+                  left: '50%',
+                  top: '50%',
                 }}
               >
                 <div
                   className="relative group cursor-pointer"
                   style={{
-                    transform: `rotate(${angle}deg) translateX(${radius}px) rotate(-${angle}deg)`,
+                    transform: `translateX(${radius}px) translateX(-50%)`,
                   }}
                 >
                   {/* Planet */}
                   <div
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-125 glass-card hover-glow"
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-125 glass-card hover-glow p-3 md:p-4"
                     style={{
                       backgroundColor: skill.color,
                       boxShadow: `0 0 30px ${skill.color}80`,
                     }}
                   >
-                    <span className="text-3xl md:text-4xl">{skill.icon}</span>
+                    <img 
+                      src={skill.logo} 
+                      alt={skill.name}
+                      className="w-full h-full object-contain"
+                      style={{
+                        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+                      }}
+                    />
                   </div>
                   
                   {/* Label */}
@@ -115,7 +132,13 @@ const SolarSystemSkills = () => {
         <div className="md:hidden grid grid-cols-2 gap-4 mt-8">
           {skills.map((skill) => (
             <div key={skill.name} className="glass-card p-4 text-center hover-glow">
-              <div className="text-4xl mb-2">{skill.icon}</div>
+              <div className="w-12 h-12 mx-auto mb-2 flex items-center justify-center">
+                <img 
+                  src={skill.logo} 
+                  alt={skill.name}
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <div className="text-sm font-semibold">{skill.name}</div>
             </div>
           ))}
