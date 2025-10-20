@@ -1,8 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import SkillsGrid from "@/components/SkillsGrid";
 import SkillsMarquee from "@/components/SkillsMarquee";
-import SkillsRadar from "@/components/SkillsRadar";
 import Projects from "@/components/Projects";
 import Journey from "@/components/Journey";
 import Contact from "@/components/Contact";
@@ -12,9 +10,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <Hero />
-      <SkillsGrid />
       <SkillsMarquee />
-      <SkillsRadar />
       <Projects />
       <Journey />
       <Contact />

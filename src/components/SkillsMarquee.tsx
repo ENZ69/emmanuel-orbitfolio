@@ -16,14 +16,14 @@ const skills = [
 
 const SkillsMarquee = () => {
   return (
-    <section id="competences-marquee" className="section-padding relative overflow-hidden">
+    <section id="competences" className="section-padding relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-gradient">Design 2: Bandeau infini</span>
+            <span className="text-gradient">Mes Compétences</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Défilement continu des technologies
+            Technologies que je maîtrise
           </p>
         </div>
 
