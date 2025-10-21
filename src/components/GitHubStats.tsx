@@ -21,7 +21,7 @@ const GitHubStats = () => {
           </p>
         </div>
 
-        <div className="grid gap-8 md:gap-12">
+        <div className="grid gap-8 md:grid-cols-2 md:gap-12">
           {/* GitHub Stats Card */}
           <div className="glass-card p-6 hover-glow animate-fade-in">
             <h3 className="text-xl font-semibold mb-6 text-primary">📊 Statistiques générales</h3>
@@ -61,13 +61,13 @@ const GitHubStats = () => {
             </div>
           </div>
 
-          {/* Activity Graph */}
-          <div className="glass-card p-6 hover-glow animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <h3 className="text-xl font-semibold mb-6 text-gradient">📈 Graphique d'activité</h3>
+          {/* Contribution Graph */}
+          <div className="glass-card p-6 hover-glow animate-fade-in md:col-span-2" style={{ animationDelay: "0.3s" }}>
+            <h3 className="text-xl font-semibold mb-6 text-gradient">📈 Graphique de contributions</h3>
             <div className="flex justify-center">
               <img
-                src={`https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=${theme}&bg_color=${bgColor}&color=${textColor}&line=${iconColor}&point=${titleColor}&area=true&hide_border=false&border_color=${borderColor}`}
-                alt="GitHub Activity Graph"
+                src={`https://ghchart.rshah.org/${titleColor}/${username}`}
+                alt="GitHub Contribution Graph"
                 className="w-full rounded-lg"
                 loading="lazy"
               />
