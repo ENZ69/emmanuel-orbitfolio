@@ -1,3 +1,5 @@
+import GitHubCalendar from 'react-github-calendar';
+
 const GitHubStats = () => {
   const username = "pnzaou";
   
@@ -62,14 +64,17 @@ const GitHubStats = () => {
           </div>
 
           {/* Contribution Graph */}
-          <div className="glass-card p-6 hover-glow animate-fade-in md:col-span-2" style={{ animationDelay: "0.3s" }}>
+          <div className="glass-card p-6 hover-glow animate-fade-in" style={{ animationDelay: "0.3s" }}>
             <h3 className="text-xl font-semibold mb-6 text-gradient">📈 Graphique de contributions</h3>
-            <div className="flex justify-center">
-              <img
-                src={`https://ghchart.rshah.org/${titleColor}/${username}`}
-                alt="GitHub Contribution Graph"
-                className="w-full rounded-lg"
-                loading="lazy"
+            <div className="flex justify-center overflow-x-auto">
+              <GitHubCalendar 
+                username={username}
+                colorScheme="dark"
+                blockSize={12}
+                fontSize={14}
+                theme={{
+                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                }}
               />
             </div>
           </div>
